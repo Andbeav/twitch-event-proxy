@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitch Event Proxy</title>
+    <style>
+        * {
+            font-family: monospace;
+        }
+
+        div {
+            margin: 2px;
+            padding: 2px;
+            border-style: solid;
+            border-width: thin;
+        }
+
+        .timestamp, .type {
+            font-size: large;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        async function broadcastEvent(event_id) {
+            const detail = document.getElementById(event_id).innerText;
+            const response = await fetch("/broadcast", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: detail,
+            });
+
+            if (!response.ok) {
+                console.log(`Failed to broadcast event: ${event_id}`);
+                console.log(response);
+                return;
+            }
+
+            console.log(`Successfully broadcasted event: ${event_id}`);
+        }
+    </script>
+</head>
+<body>
+    <div>
+    <% events.each do |event| %>
+        <% detail = Hash(String, JSON::Any).from_json(event.detail) %>
+        <% detail_id = "#{event.timestamp}-detail" %>
+        <div>
+            <p>
+                <span class="timestamp"><%= event.timestamp %></span>
+                <br />
+                <span class="type"><%= detail["subscription_type"] %></span>
+                <br />
+                <span id="<%= "#{event.timestamp}-detail" %>"><%= event.detail %></span>
+            </p>
+            <input type="button" value="replay event" data-id="<%= detail_id %>" onclick="broadcastEvent(this.dataset.id)">
+        </div>
+    <% end %>
+    </div>
+</body>
+</html>

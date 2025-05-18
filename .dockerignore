@@ -1,0 +1,6 @@
+# ignore all
+*
+# except for
+!public
+!src
+!shard.yml

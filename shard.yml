@@ -1,0 +1,20 @@
+name: twitch-event-proxy
+version: 0.1.0
+
+authors:
+  - Andbeav
+
+description: |
+  twitch eventsub proxy
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+  sqlite3:
+    github: crystal-lang/crystal-sqlite3
+
+# development_dependencies:
+#   webmock:
+#     github: manastech/webmock.cr
+
+license: GNU GPLv3
