@@ -62,4 +62,6 @@ The example includes gui at `/gui`, and socket at `/socket`. Static content serv
 
 A small example of showing a twitch notification on channel title change (source in `public/`).
 
+https://github.com/user-attachments/assets/db28edce-54ef-436c-ab65-cf4660918529
+
 
