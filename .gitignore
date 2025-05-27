@@ -1,3 +1,6 @@
+public/js/config.js
+public/js/setup.js
+public/overlay.html
+data/events.db
 lib
 shard.lock
-events.db

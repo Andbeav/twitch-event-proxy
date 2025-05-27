@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test twitch event proxy</title>
+    <script src="https://cdn.jsdelivr.net/gh/mitchwadair/tesjs@v1.0.7/dist/tes.min.js"></script>
+    <script src="/js/example_config.js"></script>
+    <script src="/js/example_setup.js"></script>
+    <link rel="stylesheet" href="/css/example_stylesheet.css">
+    <script>
+        const subscription_callbacks = {
+            "channel.update": {
+                conditions: {
+                    broadcaster_user_id: CONFIG.broadcaster_user_id
+                },
+                callback: (data) => {
+                    console.log(data);
+
+                    const new_title = document.createElement("h1");
+                    new_title.innerText = data.title;
+
+                    document.querySelector('body').appendChild(new_title);
+                    setTimeout(() => {
+                        new_title.remove();
+                    }, 5000);
+                }
+            }
+        }
+
+        setupProxy(CONFIG, subscription_callbacks);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
