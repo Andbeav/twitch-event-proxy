@@ -8,7 +8,7 @@ get "/gui" do
 
   Database.db do |conn|
     result_set = conn.query("select timestamp, detail from events order by timestamp desc")
-    Event.from_rs(result_set).each { |event| events << event }
+    events.concat Event.from_rs(result_set)
   end
 
   render "src/twitch-event-proxy/views/gui.ecr"
@@ -26,7 +26,7 @@ ws "/socket" do |socket|
     Database.db do |conn|
       conn.exec "insert into events values (?, ?)", Time.utc, message
     end
-    socket.send message
+    WebSocketManager.broadcast message
   end
 end
 

@@ -1,4 +1,4 @@
-function setupTESForwarding(tes_config, broadcaster_user_id, subscriptions, proxy_socket) {
+function setupTESForwarding(tes_config, subscriptions, proxy_socket) {
     const tes = new TES(tes_config);
 
     Object.keys(subscriptions).forEach((subscription) => {
@@ -21,7 +21,7 @@ function setupProxy(config, subscriptions) {
     const subscription_types = Object.keys(subscriptions);
     const proxy_socket = new WebSocket(config.proxy_socket_uri);
 
-    setupTESForwarding(config.tes, config.broadcaster_user_id, subscriptions, proxy_socket);
+    setupTESForwarding(config.tes, subscriptions, proxy_socket);
 
     proxy_socket.addEventListener("message", (event) => {
         const data = JSON.parse(event.data);

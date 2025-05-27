@@ -1,5 +1,5 @@
 class Database
-  DB_URI = "sqlite3://./events.db"
+  DB_URI = "sqlite3://./data/events.db"
   @@setup = false
 
   def self.preflight

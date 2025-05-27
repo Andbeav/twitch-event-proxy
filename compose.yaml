@@ -3,6 +3,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./public/:/twitch-event-proxy/public/
+      - ./src/:/twitch-event-proxy/src/
+      - ./data/:/twitch-event-proxy/data/
     ports:
       - 3000:3000
     command: crystal run src/twitch-event-proxy.cr

@@ -40,6 +40,15 @@
 
             console.log(`Successfully broadcasted event: ${event_id}`);
         }
+
+        // This is pretty ugly, maybe merge the 'id' in echo proxy to
+        // facilitate standard timestamps across storage and the event.
+        const socket = new WebSocket('ws://localhost:3000/socket');
+        socket.addEventListener("message", (event) => {
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        });
     </script>
 </head>
 <body>
