@@ -1,12 +1,28 @@
 services:
-  app:
+  dev:
     build:
       context: .
       dockerfile: Dockerfile
+      target: dev
     volumes:
-      - ./public/:/twitch-event-proxy/public/
       - ./src/:/twitch-event-proxy/src/
+      - ./public/:/twitch-event-proxy/public/
       - ./data/:/twitch-event-proxy/data/
     ports:
       - 3000:3000
     command: crystal run src/twitch-event-proxy.cr
+
+  release:
+    image: localhost/twitch-event-proxy:release
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: release
+
+  production:
+    image: localhost/twitch-event-proxy:release
+    volumes:
+      - ./public/:/twitch-event-proxy/public/
+      - ./data/:/twitch-event-proxy/data/
+    ports:
+      - 3000:3000

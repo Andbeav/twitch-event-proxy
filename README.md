@@ -51,9 +51,16 @@ Replace config with your own and give it a go.
 Run locally with your preferred container engine (I suggest podman if you don't have one). SQLite store persists to `data/events.db`.
 
 ```txt
-$ podman-compose up --build app
+$ podman-compose up --build dev
 ...
 INFO - kemal: [development] Kemal is ready to lead at http://0.0.0.0:3000
+```
+
+Compile and package into slimmer image and run as 'production'
+
+```txt
+$ podman-compose build release
+$ podman-compose up production
 ```
 
 The example includes gui at `/gui`, and socket at `/socket`. Static content served from `./public`.
