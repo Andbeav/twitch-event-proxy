@@ -13,8 +13,8 @@ dependencies:
   sqlite3:
     github: crystal-lang/crystal-sqlite3
 
-# development_dependencies:
-#   webmock:
-#     github: manastech/webmock.cr
+targets:
+  twitch-event-proxy:
+    main: src/twitch-event-proxy.cr
 
 license: GNU GPLv3
